@@ -9,6 +9,8 @@
 - Ajouter Etudiant
 - Supprimer Etudiant et modifier le role d'un Etudiant
 - Ajouter Livre
+- Lister les livres d'une categorie
+- Lister les livres d'un auteur
 - Supprimer Livre
 - Reserver livre
 - Authentification
