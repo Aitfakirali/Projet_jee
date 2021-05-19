@@ -1,10 +1,7 @@
 package com.demo.servlets;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import com.demo.beans.Category;
 import com.demo.beans.Etudiant;
@@ -97,6 +93,7 @@ public class Gestion_livres extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Etudiant et = (Etudiant)session.getAttribute("Etudiant");
+		boolean isinserted = false;
 		if(et != null) {
 			if(et.getEtudiant_role() != null && et.getEtudiant_role().equals("ADMIN")) {
 				if(request.getParameter("retour_id") != null) {
@@ -116,12 +113,18 @@ public class Gestion_livres extends HttpServlet {
 						lv.setDescription(description);
 						lv.setCategory(LivreImpl.getCategory(category));
 						LivreImpl.Save(lv);
+						isinserted = true;
 					}
 				}
 				
 			}
 		}
-		doGet(request,response);
+		if(isinserted) {
+			doGet(request,response);
+		}else {
+			response.sendRedirect("Livres?filter=filtered");
+		}
+		
 		
 	}
 	
