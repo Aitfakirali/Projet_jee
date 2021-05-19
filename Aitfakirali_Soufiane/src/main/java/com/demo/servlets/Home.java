@@ -103,8 +103,14 @@ public class Home extends HttpServlet {
 		if( et != null) {
 			if(req.getParameter("reserve_id") != null){
 				int id = Integer.parseInt(req.getParameter("reserve_id"));
-				LivreImpl.emprunte(et.getEtudiant_id(),id);
-				req.setAttribute("message", "le livre est supprimer avec succées  ");
+				if(LivreImpl.count(et.getEtudiant_id()) < 3) {
+					LivreImpl.reserver(et.getEtudiant_id(),id);
+					req.setAttribute("message", "le livre est reserver avec succées  ");
+				}else {
+					req.setAttribute("error", "cher étudiant vous avez déjà réservé quelques livres, vous ne pouvez pas réserver plus de 3 livres");
+				}
+				
+				
 			}
 			doGet(req,resp);
 		}else {

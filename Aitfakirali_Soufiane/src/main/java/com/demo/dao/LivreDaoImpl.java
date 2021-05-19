@@ -1,7 +1,6 @@
 package com.demo.dao;
 
 import com.demo.beans.Category;
-import com.demo.beans.Etudiant;
 import com.demo.beans.Livre;
 
 import java.sql.Connection;
@@ -150,8 +149,8 @@ public class LivreDaoImpl implements Dao<Livre>{
 
     @Override
     public boolean Save(Livre o) {
-    	String sql = "INSERT INTO `db_biblio`.`livre` (`livre_auteur`, `livre_titre`, `date_creation`, `categ_id`) "
-    			+ "VALUES (?, ?, ?, ?)";
+    	String sql = "INSERT INTO `db_biblio`.`livre` (`livre_auteur`, `livre_titre`, `date_creation`, `categ_id`,`description`) "
+    			+ "VALUES (?, ?, ?, ?, ?)";
     	Connection con = null;
     	PreparedStatement st = null;
 		try {
@@ -161,6 +160,7 @@ public class LivreDaoImpl implements Dao<Livre>{
 			st.setString(2, o.getLivre_titre());
 			st.setDate(3, o.getDate_creation());
 			st.setInt(4,o.getCategory().getCategory_id());
+			st.setString(5,o.getDescription());
 	    	if(st.executeUpdate() != 0)
 	    		return true;
 		} catch (SQLException e) {
@@ -253,8 +253,33 @@ public class LivreDaoImpl implements Dao<Livre>{
         }
         return Livres;
 	}
-
-	public boolean emprunte(int etudiant_id, int livre_id) {
+	
+	// etudiant ne peut pas reserver plus de 3 livres
+	// cette fonction va returner le nombre des livres reserver par etudiant
+	public int count(int id) {
+		int nb = 0;
+		String sql = "Select COUNT(*) as count from emprunt where etud_id = ?;";
+    	Connection con = null;
+    	ResultSet res = null;
+    	PreparedStatement st = null;
+		try {
+			con = factory.getConnection();
+			st = con.prepareStatement(sql);
+			st.setInt(1, id);
+			res = st.executeQuery();
+	        if(res.next()) {
+	           nb = res.getInt("count");
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			Close(con,st,null);
+		}
+		return nb;
+	}
+	
+	
+	public boolean reserver(int etudiant_id, int livre_id) {
 		String sql = "INSERT INTO emprunt values(?,?,NOW(),NOW());";
     	Connection con = null;
     	PreparedStatement st = null;

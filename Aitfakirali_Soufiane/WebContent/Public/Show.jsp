@@ -30,12 +30,12 @@
 		        <p class="card-text"><%=livre.getDescription()!=null?livre.getDescription():"Il n y a aucune description pour l'instant"%></p>
 		        <p class="card-text">Auteur : <strong><%=livre.getLivre_auteur()%></strong></p>
 		        <p class="card-text">Emprunte : <small class="text-muted"><%=livre.isEmprunte()?" Oui":" Non"%></small></p>
-		        <p class="card-text">La date de publication : <small class="text-muted"><%=livre.getDate_creation().toGMTString()%></small></p>
+		        <p class="card-text">La date de publication : <small class="text-muted"><%=livre.getDate_creation()%></small></p>
 		        <p class="card-text">Categorie : <small class="text-muted"><%=livre.getCategory().getCategory_nom()%></small></p>
 		        <div class="col col-xl-6">
 					<form method="post" action="Livres" >
 						<button type="submit" class="align-items-start col-4 m-2 btn btn-sm btn<%=livre.isEmprunte()?"":"-outline" %>-dark" <%=livre.isEmprunte()?"":"disabled"%>>retour</button>
-						<input type="text" name="retour_id" value="<%=livre.getLivre_id()%>" hidden/>
+						<input type="text" class="visually-hidden" name="retour_id" value="<%=livre.getLivre_id()%>"/>
 					</form>
 			  	</div>
 		      </div>
@@ -43,13 +43,6 @@
 		    
 		  </div>
 		</div>
-  		
-			<style>
-				*{
-					margin:0;
-					padding:0;	
-				}
-			</style>
     </div>
 </body>
 </html>

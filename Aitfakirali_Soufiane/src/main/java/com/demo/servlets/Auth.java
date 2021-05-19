@@ -93,7 +93,7 @@ public class Auth extends HttpServlet {
 				if(EtudiantImpl.Save(et)) {
 					request.setAttribute("message", "les informations sont saisie avec succes");
 				}else {
-					request.setAttribute("error", "les informations sont saisie correctement");
+					request.setAttribute("error", "Il y a une erreur dans les information");
 				}
 			}
 			this.getServletContext().getRequestDispatcher("/WEB-INF/Auth.jsp").forward(request, response);

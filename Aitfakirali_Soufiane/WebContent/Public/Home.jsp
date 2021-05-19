@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList,com.demo.beans.Livre"%>
-<%@page import="com.demo.beans.Category"%>
+<%@page import="java.util.*,com.demo.beans.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +22,10 @@
 					    <% 
 					    	String category = (String)request.getAttribute("category");	
 					    %>
-					    <select onchange="this.form.submit()" id="inputState" name="category" class="form-select" autofocus="true">
+					    <select onchange="this.form.submit()" id="inputState" name="category" class="form-select" autofocus>
 					    <option value="all" <%=category.equals("all")?"selected":""%>>Tous les livres</option>
 					      <%
-						  	ArrayList<Category> categories = (ArrayList<Category>)request.getAttribute("categories");					      	
+						  	List<Category> categories = (List<Category>)request.getAttribute("categories");					      	
 						  	for(Category cat : categories){
 					  		%>
 					      		<option value="<%=cat.getCategory_id()%>" <%=category.equals(String.valueOf(cat.getCategory_id()))?"selected":""%>><%=cat.getCategory_nom()%></option>
@@ -50,13 +49,33 @@
 	  		 </div>
   		 	
             <div class="col-12">
+            <div>
+            	<% String error = (String) request.getAttribute("error");
+				  		if(error!= null){
+				  	%>
+				  		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						  <strong>Un probleme!!!!</strong> 
+							<%= error%>
+						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+			  		<% } %>
+		            <% String message = (String) request.getAttribute("message");
+				  		if(message!= null){
+				  	%>
+				  		<div class="alert alert-success alert-dismissible fade show" role="alert">
+						  <strong> C'est Bonne... </strong> 
+							<%= message%>
+						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+			  		<% } %>
+            </div>
             <%
-	            ArrayList<Livre> livres = (ArrayList<Livre>)request.getAttribute("livres");
+	            List<Livre> livres = (ArrayList<Livre>)request.getAttribute("livres");
 			  	if(livres.size() > 0){
             %>
             	
             	<table class="table caption-top table-borderless table-sm user-select-none">
-				  <caption><div class="display-6 m-4">Liste des livres disponible </div></caption>
+				  <caption class="display-6 m-4">Liste des livres disponible</caption>
 				  <thead>
 				    <tr class="table-dark">
 				      <th scope="col">Num</th>
@@ -83,7 +102,7 @@
 						    <div class="col col-xl-5">
 							    <form method="post" action="Home" >
 								    <button type="submit" class="btn btn-sm btn-outline-secondary">Reserver</button>
-								    <input type="text" name="reserve_id" value="<%=livre.getLivre_id()%>" hidden/>
+								    <input type="text" class="visually-hidden" name="reserve_id" value="<%=livre.getLivre_id()%>"/>
 								</form>
 							</div>
 						</div>

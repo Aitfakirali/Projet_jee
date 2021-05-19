@@ -106,12 +106,14 @@ public class Gestion_livres extends HttpServlet {
 					if(isValid(request)) {
 						String auteur = request.getParameter("auteur");
 						String titre = request.getParameter("titre");
-						Date date = Date.valueOf(request.getParameter("date"));						
+						Date date = Date.valueOf(request.getParameter("date"));
+						String description = request.getParameter("description");
 						int category = Integer.parseInt(request.getParameter("category"));
 						Livre lv = new Livre();
 						lv.setLivre_auteur(auteur);
 						lv.setLivre_titre(titre);
 						lv.setDate_creation(date);
+						lv.setDescription(description);
 						lv.setCategory(LivreImpl.getCategory(category));
 						LivreImpl.Save(lv);
 					}
