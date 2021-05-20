@@ -18,6 +18,7 @@
   		<div class="m-5 display-6 ">Détails du livre </div>
   		<%
   			Livre livre= (Livre)request.getAttribute("livre");
+  			Etudiant etud = (Etudiant)request.getAttribute("etudiant");
   		%>
   		<div class="card m-5 mb-3" style="max-width: 80%;">
 		  <div class="row g-0">
@@ -32,16 +33,42 @@
 		        <p class="card-text">Emprunte : <small class="text-muted"><%=livre.isEmprunte()?" Oui":" Non"%></small></p>
 		        <p class="card-text">La date de publication : <small class="text-muted"><%=livre.getDate_creation()%></small></p>
 		        <p class="card-text">Categorie : <small class="text-muted"><%=livre.getCategory().getCategory_nom()%></small></p>
+		          <table class="table caption-top table-borderless table-sm user-select-none">
+				  <caption class=" display-6 p-3 m-0">l'étudiant qui a réservé ce livre</caption>
+				  <thead>
+				    <tr class="table-dark">
+				      <th scope="col">#</th>
+				      <th scope="col">Nom</th>
+				      <th scope="col">prenom</th>
+				      <th scope="col">email</th>
+				      <th scope="col">addresse</th>
+				      <th scope="col">filiere</th>
+				      <th scope="col">telephone</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				    <td></td>
+				      <td><%=etud.getEtudiant_nom()%></td>
+				      <td><%=etud.getEtudiant_prenom()%></td>
+				      <td><%=etud.getEtudiant_email() %></td>
+				      <td><%=etud.getEtudiant_adresse()%></td>
+				      <td><%=etud.getEtudiant_filiere()%></td>
+				      <td><%=etud.getEtudiant_telephone()%></td>
+				    </tr>
+				  </tbody>
+				</table>
 		        <div class="col col-xl-6">
 					<form method="post" action="Livres" >
 						<button type="submit" class="align-items-start col-4 m-2 btn btn-sm btn<%=livre.isEmprunte()?"":"-outline" %>-dark" <%=livre.isEmprunte()?"":"disabled"%>>retour</button>
 						<input type="text" class="visually-hidden" name="retour_id" value="<%=livre.getLivre_id()%>"/>
 					</form>
 			  	</div>
+			  	
 		      </div>
 		    </div>
-		    
 		  </div>
+		
 		</div>
     </div>
 </body>

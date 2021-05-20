@@ -49,8 +49,8 @@
 	          </a>
 	          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 	           	<li><h6 class="dropdown-header"><%=et.getEtudiant_nom() %> <%=et.getEtudiant_prenom() %></h6></li>
-	           	 <li><a class="dropdown-item" href="">Modifiez votre compte</a></li>
-	            <li><a class="dropdown-item" href="<%=request.getContextPath()%>/Disconnect">Disconnect</a></li>
+	           	 <li><a class="dropdown-item ms-3 mt-1" href="<%=request.getContextPath()%>/Update">Modifiez votre compte</a></li>
+	            <li><a class="dropdown-item ms-3 mt-1" href="<%=request.getContextPath()%>/Disconnect">Disconnect</a></li>
 	          </ul>
 	        </div>
 	      <%} else{%>

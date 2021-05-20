@@ -51,7 +51,7 @@ public class EtudiantDaoImpl implements Dao<Etudiant>{
     }
     
     public boolean isExist(String email){
-    	String sql = "SELECT etudiant_id FROM etudiant WHERE etudiant_email=?";
+    	String sql = "SELECT * FROM etudiant WHERE etudiant_email=?";
         Connection con = null;
         PreparedStatement st = null;
         ResultSet res = null;
@@ -92,6 +92,37 @@ public class EtudiantDaoImpl implements Dao<Etudiant>{
     	return null;
     }
     
+    public Etudiant getEtudiantReserveLivre(int id){
+    	 String sql = "SELECT *FROM etudiant WHERE etudiant_id = ANY(SELECT etud_id from emprunt WHERE livre_id = ?);";
+         Etudiant et = null;
+         Connection con = null;
+         PreparedStatement st = null;
+         ResultSet res = null;
+         try {
+             con = factory.getConnection();
+             st = con.prepareStatement(sql);
+             st.setInt(1, id);
+             res = st.executeQuery();
+             if(res.next()) {
+                 et = new Etudiant();
+                 et.setEtudiant_id(res.getInt("etudiant_id"));
+                 et.setEtudiant_nom(res.getString("etudiant_nom"));
+                 et.setEtudiant_prenom(res.getString("etudiant_prenom"));
+                 et.setEtudiant_age(res.getInt("etudiant_age"));
+                 et.setEtudiant_email(res.getString("etudiant_email"));
+                 et.setEtudiant_password(res.getString("etudiant_password"));
+                 et.setEtudiant_telephone(res.getString("etudiant_telephone"));
+                 et.setEtudiant_adresse(res.getString("etudiant_adresse"));
+                 et.setEtudiant_filiere(res.getString("etudiant_filiere"));
+                 et.setEtudiant_role(getRole(res.getInt("etudiant_role")));
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }finally {
+         	Close(con,st,res);
+         }
+         return et;
+    }
     
     //Workiing
     public Etudiant Auth(String email,String pass) {
@@ -194,7 +225,30 @@ public class EtudiantDaoImpl implements Dao<Etudiant>{
     }
     @Override
     public boolean Update(Etudiant o) {
-    	return false;
+    	String sql = "UPDATE etudiant"
+    			+ " SET etudiant_nom = ?, etudiant_prenom = ?, etudiant_email = ?, etudiant_adresse = ?, etudiant_telephone = ?, etudiant_filiere = ?, etudiant_age = ?"
+    			+ " WHERE etudiant_id = ?";   	
+    	Connection con = null;
+    	PreparedStatement st = null;
+		try {
+			con = factory.getConnection();
+			st = con.prepareStatement(sql);
+			st.setString(1, o.getEtudiant_nom());
+			st.setString(2, o.getEtudiant_prenom());
+			st.setString(3, o.getEtudiant_email());
+			st.setString(4, o.getEtudiant_adresse());
+			st.setString(5, o.getEtudiant_telephone());
+			st.setString(6, o.getEtudiant_filiere());
+			st.setInt(7, o.getEtudiant_age());
+			st.setInt(8, o.getEtudiant_id());
+			if(st.executeUpdate() != 0)
+				return true;
+		} catch (SQLException e) {
+			return false;
+		} finally {
+			Close(con,st,null);
+		}
+		return false;
     }
 
     @Override
