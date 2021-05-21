@@ -46,7 +46,9 @@ public class Show extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("livre_id");
 		Livre livre = LivreImpl.getOneByid(Integer.parseInt(id));
-		Etudiant et = EtudiantImpl.getEtudiantReserveLivre(livre.getLivre_id());
+		Etudiant et = null;
+		if(livre != null)
+			et = EtudiantImpl.getEtudiantReserveLivre(livre.getLivre_id());
 		request.setAttribute("livre", livre);
 		request.setAttribute("etudiant", et);
 		this.getServletContext().getRequestDispatcher("/Public/Show.jsp").forward(request, response);

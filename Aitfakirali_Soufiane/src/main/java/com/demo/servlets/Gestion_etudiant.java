@@ -1,7 +1,6 @@
 package com.demo.servlets;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletConfig;

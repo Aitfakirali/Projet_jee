@@ -19,6 +19,11 @@
   		<%
   			Livre livre= (Livre)request.getAttribute("livre");
   			Etudiant etud = (Etudiant)request.getAttribute("etudiant");
+  			Etudiant u = (Etudiant)session.getAttribute("Etudiant");
+  			
+		 if(livre == null){
+		  		response.sendRedirect("Home");		
+		  }else{
   		%>
   		<div class="card m-5 mb-3" style="max-width: 80%;">
 		  <div class="row g-0">
@@ -33,6 +38,7 @@
 		        <p class="card-text">Emprunte : <small class="text-muted"><%=livre.isEmprunte()?" Oui":" Non"%></small></p>
 		        <p class="card-text">La date de publication : <small class="text-muted"><%=livre.getDate_creation()%></small></p>
 		        <p class="card-text">Categorie : <small class="text-muted"><%=livre.getCategory().getCategory_nom()%></small></p>
+		        <%if(etud != null && u != null && u.getEtudiant_role().equals("ADMIN")){ %>
 		          <table class="table caption-top table-borderless table-sm user-select-none">
 				  <caption class=" display-6 p-3 m-0">l'étudiant qui a réservé ce livre</caption>
 				  <thead>
@@ -58,6 +64,7 @@
 				    </tr>
 				  </tbody>
 				</table>
+				<%} %>
 		        <div class="col col-xl-6">
 					<form method="post" action="Livres" >
 						<button type="submit" class="align-items-start col-4 m-2 btn btn-sm btn<%=livre.isEmprunte()?"":"-outline" %>-dark" <%=livre.isEmprunte()?"":"disabled"%>>retour</button>
@@ -70,6 +77,7 @@
 		  </div>
 		
 		</div>
+		<%} %>
     </div>
 </body>
 </html>
