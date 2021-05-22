@@ -18,9 +18,10 @@
 	  		 <div class="col-12 m-auto d-flex justify-content-center">
 	  		 	<form class="row" action="Home" method="get" class="d-flex justify-content-center">
 					  <div class="col-6 mt-4 p-3 ">
-					    <label for="inputState" class="form-label">Category</label>
+					    <label for="inputState" class="form-label">Categorie</label>
 					    <% 
-					    	String category = (String)request.getAttribute("category");	
+					    	String category = (String)request.getAttribute("category");
+					    	String auteur = (String)request.getParameter("auteur");	
 					    %>
 					    <select onchange="this.form.submit()" id="inputState" name="category" class="form-select" autofocus>
 					    <option value="all" <%=category.equals("all")?"selected":""%>>Tous les livres</option>
@@ -34,7 +35,7 @@
 					  </div>
 						<div class="col-4 mt-4 p-4">
 							<label for="floatingInput"></label>
-						  <input type="text" name="auteur" class="form-control" id="floatingInput" placeholder="Nom Auteur">
+						  <input type="text" name="auteur" value="<%=auteur!=null?auteur.toLowerCase():"" %>" class="form-control" id="floatingInput" placeholder="Nom Auteur">
 						  
 						</div>
 					  <div class="col-2 mt-4 p-5">
@@ -101,7 +102,7 @@
 				      	<div class="row">
 						    <div class="col col-xl-5">
 							    <form method="post" action="Home" >
-								    <button type="submit" class="btn btn-sm btn-outline-secondary">Reserver</button>
+								    <button type="submit" class="btn btn-sm btn-dark">Reserver</button>
 								    <input type="text" class="visually-hidden" name="reserve_id" value="<%=livre.getLivre_id()%>"/>
 								</form>
 							</div>
@@ -123,7 +124,7 @@
 			</div>
 			<script> 
 				show = (id) => {
-					window.location.href = 'Show?livre_id='+id
+					location.href = "<%=request.getContextPath()%>/Show?livre_id="+id
 				}
 			</script>
 			<style>
@@ -131,15 +132,26 @@
 					margin:0;
 					padding:0;	
 				}
+				tr:hover{
+		    		animation: anim2 1s normal;
+		    		background-color:var(--bs-success);
+		    		color:var(--bs-light) !important;
+		    		border-radius:20px;
+		    	}
+		    	
+		    	@keyframes anim2 {
+				  from {
+				  	background-color:var(--bs-light);
+				  }
+				  to {
+				  	background-color:var(--bs-success);
+				  }
+				}
 				
 				tr{
 					cursor:pointer;
-					
 				}
 				
-				tr:hover{
-					background-color:lightgrey;
-				}
 			</style>
         </div>
     </div>

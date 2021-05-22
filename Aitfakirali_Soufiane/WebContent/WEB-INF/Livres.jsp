@@ -17,19 +17,29 @@
 					margin:0;
 					padding:0;	
 				}
+				tr:hover{
+		    		animation: anim2 1s normal;
+		    		background-color:var(--bs-dark);
+		    		color:var(--bs-white) !important;
+		    		border-radius:20px;
+		    	}
+		    	
+		    	@keyframes anim2 {
+				  from {
+				  	background-color:var(--bs-light);
+				  }
+				  to {
+				  	background-color:var(--bs-dark);
+				  }
+				}
 				
 				tr{
 					cursor:pointer;
 				}
-				
-				tr:hover > td{
-					background-color:#C1BDB3;
-					color:black;
-				}
 	</style>
 	<script> 
 				show = (id) => {
-					window.location.href = 'Show?livre_id='+id
+					window.location.href = "<%=request.getContextPath()%>/Show?livre_id="+id
 				}
 	</script>
 </head>
