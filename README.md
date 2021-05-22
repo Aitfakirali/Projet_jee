@@ -2,7 +2,7 @@
 ##  Réalise par :  _Ait fakir ali soufiane_
 
 ## Compte Administrateur
-  - Email : Soufiane@gmail.com
+  - Email : aitfakiralisoufiane.1998@gmail.com
   - Password : Soufiane
 ## Features
 
