@@ -41,34 +41,6 @@ INSERT INTO `category` VALUES (1,'Art musique et cinéma.',NULL),(2,'Bandes dess
 UNLOCK TABLES;
 
 --
--- Table structure for table `emprunt`
---
-
-DROP TABLE IF EXISTS `emprunt`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `emprunt` (
-  `etud_id` int DEFAULT NULL,
-  `livre_id` int DEFAULT NULL,
-  `date_emprunt` datetime DEFAULT NULL,
-  `date_retour` datetime DEFAULT NULL,
-  KEY `etud_id` (`etud_id`),
-  KEY `livre_id` (`livre_id`),
-  CONSTRAINT `emprunt_ibfk_1` FOREIGN KEY (`etud_id`) REFERENCES `etudiant` (`etudiant_id`) ON DELETE SET NULL,
-  CONSTRAINT `emprunt_ibfk_2` FOREIGN KEY (`livre_id`) REFERENCES `livre` (`livre_id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `emprunt`
---
-
-LOCK TABLES `emprunt` WRITE;
-/*!40000 ALTER TABLE `emprunt` DISABLE KEYS */;
-/*!40000 ALTER TABLE `emprunt` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `etudiant`
 --
 
@@ -166,5 +138,33 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+--
+-- Table structure for table `emprunt`
+--
+
+DROP TABLE IF EXISTS `emprunt`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emprunt` (
+  `etud_id` int DEFAULT NULL,
+  `livre_id` int DEFAULT NULL,
+  `date_emprunt` datetime DEFAULT NULL,
+  `date_retour` datetime DEFAULT NULL,
+  KEY `etud_id` (`etud_id`),
+  KEY `livre_id` (`livre_id`),
+  CONSTRAINT `emprunt_ibfk_1` FOREIGN KEY (`etud_id`) REFERENCES `etudiant` (`etudiant_id`) ON DELETE SET NULL,
+  CONSTRAINT `emprunt_ibfk_2` FOREIGN KEY (`livre_id`) REFERENCES `livre` (`livre_id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emprunt`
+--
+
+LOCK TABLES `emprunt` WRITE;
+/*!40000 ALTER TABLE `emprunt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emprunt` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- Dump completed on 2021-05-22 21:30:00
