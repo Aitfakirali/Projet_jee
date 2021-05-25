@@ -35,7 +35,7 @@
 			  		<% } %>
 			  	
 			  	<div  class="m-3 d-flex justify-content-center">
-			  		<img alt="logo FSBM"  src="<%=request.getContextPath()%>/images/logo.png"/>
+			  		<img alt="logo FSBM"  src="<%=request.getContextPath()+"/images/logo.png" %>"/>
 			  	</div>
 				<div class="display-6 ">Bienvenue à la bibliothèque de la faculté de science Ben M'sik</div>
 			</div>
