@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.demo.beans.Etudiant;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.EtudiantDaoImpl;
+import com.demo.dao.EtudiantDaoManager;
 
 /**
  * Servlet implementation class Update
@@ -19,14 +19,14 @@ import com.demo.dao.EtudiantDaoImpl;
 @WebServlet("/Update")
 public class Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     private EtudiantDaoImpl EtudiantImpl;
+     private EtudiantDaoManager EtudiantImpl;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Update() {
         super();
         DaoFactory factory = DaoFactory.getInstance();
-		EtudiantImpl = (EtudiantDaoImpl) factory.getEtudianDaoImpl();
+		EtudiantImpl = (EtudiantDaoManager) factory.getEtudianDaoImpl();
     }
 
 	/**

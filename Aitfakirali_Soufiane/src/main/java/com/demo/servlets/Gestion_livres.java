@@ -20,7 +20,7 @@ import com.demo.beans.Category;
 import com.demo.beans.Etudiant;
 import com.demo.beans.Livre;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.LivreDaoImpl;
+import com.demo.dao.LivreDaoManager;
 
 
 /**
@@ -30,7 +30,7 @@ import com.demo.dao.LivreDaoImpl;
 @MultipartConfig( location = "c:/Images", maxFileSize = 10 * 1024 * 1024, maxRequestSize = 5 * 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
 public class Gestion_livres extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private LivreDaoImpl LivreImpl = null;
+	private LivreDaoManager LivreImpl = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +38,7 @@ public class Gestion_livres extends HttpServlet {
     public Gestion_livres() {
         super();
 		DaoFactory factory = DaoFactory.getInstance();
-		LivreImpl = (LivreDaoImpl) factory.getLivreDaoImpl();
+		LivreImpl = (LivreDaoManager) factory.getLivreDaoImpl();
     }
     
     @Override

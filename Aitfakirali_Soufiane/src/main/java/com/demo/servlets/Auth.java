@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.demo.beans.Etudiant;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.EtudiantDaoImpl;
+import com.demo.dao.EtudiantDaoManager;
 
 /**
  * Servlet implementation class AuthEtudiant
@@ -20,7 +20,7 @@ import com.demo.dao.EtudiantDaoImpl;
 @WebServlet(urlPatterns={"/Auth","/register"})
 public class Auth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EtudiantDaoImpl EtudiantImpl = null;
+	private EtudiantDaoManager EtudiantImpl = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -28,7 +28,7 @@ public class Auth extends HttpServlet {
 	public Auth() {
 		super();
 		DaoFactory factory = DaoFactory.getInstance();
-		EtudiantImpl = (EtudiantDaoImpl) factory.getEtudianDaoImpl();
+		EtudiantImpl = (EtudiantDaoManager) factory.getEtudianDaoImpl();
 	}
 
 	@Override

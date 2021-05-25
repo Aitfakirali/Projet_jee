@@ -33,11 +33,11 @@ public class DaoFactory {
     }
 
     public Dao<Etudiant> getEtudianDaoImpl(){
-        return new EtudiantDaoImpl(this);
+        return new EtudiantDaoManager(this);
     }
 
     public Dao<Livre> getLivreDaoImpl(){
-        return new LivreDaoImpl(this);
+        return new LivreDaoManager(this);
     }
 
 }

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.demo.beans.Etudiant;
 import com.demo.beans.Livre;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.EtudiantDaoImpl;
-import com.demo.dao.LivreDaoImpl;
+import com.demo.dao.EtudiantDaoManager;
+import com.demo.dao.LivreDaoManager;
 
 /**
  * Servlet implementation class Show
@@ -21,8 +21,8 @@ import com.demo.dao.LivreDaoImpl;
 @WebServlet("/Show")
 public class Show extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private LivreDaoImpl LivreImpl = null;
-	private EtudiantDaoImpl EtudiantImpl = null;
+	private LivreDaoManager LivreImpl = null;
+	private EtudiantDaoManager EtudiantImpl = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,8 +36,8 @@ public class Show extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		DaoFactory factory = DaoFactory.getInstance();
-		LivreImpl = (LivreDaoImpl) factory.getLivreDaoImpl();
-		EtudiantImpl = (EtudiantDaoImpl) factory.getEtudianDaoImpl();
+		LivreImpl = (LivreDaoManager) factory.getLivreDaoImpl();
+		EtudiantImpl = (EtudiantDaoManager) factory.getEtudianDaoImpl();
 	}
 
 	/**

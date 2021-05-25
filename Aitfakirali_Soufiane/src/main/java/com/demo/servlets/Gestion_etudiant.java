@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.demo.beans.Etudiant;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.EtudiantDaoImpl;
+import com.demo.dao.EtudiantDaoManager;
 
 /**
  * Servlet implementation class gestion_etudiant
@@ -21,7 +21,7 @@ import com.demo.dao.EtudiantDaoImpl;
 @WebServlet("/etudiants")
 public class Gestion_etudiant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EtudiantDaoImpl EtudiantImpl = null;
+	private EtudiantDaoManager EtudiantImpl = null;
 	private String[] roles = {"","ADMIN","USER"};
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,7 +29,7 @@ public class Gestion_etudiant extends HttpServlet {
     public Gestion_etudiant() {
         super();
         DaoFactory factory = DaoFactory.getInstance();
-		EtudiantImpl = (EtudiantDaoImpl) factory.getEtudianDaoImpl();
+		EtudiantImpl = (EtudiantDaoManager) factory.getEtudianDaoImpl();
     }
     @Override
 	public void init(ServletConfig config) throws ServletException {

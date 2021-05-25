@@ -18,7 +18,7 @@ import com.demo.beans.Category;
 import com.demo.beans.Etudiant;
 import com.demo.beans.Livre;
 import com.demo.dao.DaoFactory;
-import com.demo.dao.LivreDaoImpl;
+import com.demo.dao.LivreDaoManager;
 
 /**
  * Servlet implementation class Home
@@ -26,14 +26,14 @@ import com.demo.dao.LivreDaoImpl;
 @WebServlet(urlPatterns = { "/Home", "/" })
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private LivreDaoImpl LivreImpl = null;
+	private LivreDaoManager LivreImpl = null;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public Home() {
 		super();
 		DaoFactory factory = DaoFactory.getInstance();
-		LivreImpl = (LivreDaoImpl) factory.getLivreDaoImpl();
+		LivreImpl = (LivreDaoManager) factory.getLivreDaoImpl();
 	}
 	
 	
